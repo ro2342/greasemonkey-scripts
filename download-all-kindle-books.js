@@ -7,6 +7,7 @@
 // @match        https://www.amazon.com/hz/mycd/digital-console/contentlist/booksAll/*
 // @grant        GM_xmlhttpRequest
 // @run-at       document-idle
+// @license      MIT
 // ==/UserScript==
 
 (function() {
