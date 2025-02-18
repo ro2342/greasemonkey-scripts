@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  Adds a button to trigger downloads of all Kindle books on the page
-// @author       You
+// @author       Chris Hollindale
 // @match        https://www.amazon.com/hz/mycd/digital-console/contentlist/booksAll/*
 // @grant        GM_xmlhttpRequest
 // @run-at       document-idle
@@ -14,7 +14,7 @@
 
   // Wait until the page is fully loaded before injecting the button
   window.addEventListener('load', function() {
-      // Create a button to trigger the action
+      // Create a button in the top right of the page to trigger the action
       const button = document.createElement('button');
       button.innerText = 'Trigger Download';
       button.style.position = 'fixed';
@@ -37,6 +37,7 @@
         clickElementWithin(document, selector);
       }
 
+      // Function to simulate clicking an element within a specific selector
       function clickElementWithin(topElement, selector) {
         const element = topElement.querySelector(selector);
         if (element) {
@@ -73,7 +74,9 @@
               }, 500));
 
               await new Promise(resolve => setTimeout(() => {
-                  clickElementWithin(dropdown, 'span[id^="download_and_transfer_list_"]'); // First Kindle in list
+                  clickElementWithin(dropdown, 'span[id^="download_and_transfer_list_"]'); // Choose the first Kindle in list
+                  // If you want the second Kindle in the list, change the above line to this instead (for the third, you'd change the [1] to [2] and so on):
+                  //   dropdown.querySelectorAll('span[id^="download_and_transfer_list_"]')[1].click();
                   resolve();
               }, 500));
 
@@ -88,7 +91,8 @@
               }, 500));
 
               // Wait a little before processing the next dropdown
-              await new Promise(resolve => setTimeout(resolve, 14000));
+              // This is set to 5 seconds - you can speed this up even faster if you prefer
+              await new Promise(resolve => setTimeout(resolve, 5000));
           }
 
           console.log('All dropdowns processed');
