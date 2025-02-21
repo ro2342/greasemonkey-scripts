@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Amazon Kindle Book Downloader
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.2.1
 // @description  Adds a button to trigger downloads of all Kindle books on the page
 // @author       Chris Hollindale
-// @match        https://www.amazon.com/hz/mycd/digital-console/contentlist/booksAll/*
+// @match        https://www.amazon.com/hz/mycd/digital-console/contentlist/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
 // @run-at       document-idle
