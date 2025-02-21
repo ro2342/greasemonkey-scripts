@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Amazon Kindle Book Downloader
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  Adds a button to trigger downloads of all Kindle books on the page
 // @author       Chris Hollindale
 // @match        https://www.amazon.com/hz/mycd/digital-console/contentlist/booksAll/*
 // @grant        GM_xmlhttpRequest
+// @grant        GM_addStyle
 // @run-at       document-idle
 // @license      MIT
 // ==/UserScript==
@@ -105,7 +106,7 @@
       });
   });
 
-  // Optional: Add some CSS to make the button look nice
+  // Add some CSS to make the button look nice
   GM_addStyle(`
       button {
           font-family: Arial, sans-serif;
