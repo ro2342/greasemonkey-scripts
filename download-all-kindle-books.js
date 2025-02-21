@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Amazon Kindle Book Downloader
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.2
 // @description  Adds a button to trigger downloads of all Kindle books on the page
 // @author       Chris Hollindale
 // @match        https://www.amazon.com/hz/mycd/digital-console/contentlist/booksAll/*
@@ -66,12 +66,9 @@
 
               // Now perform the actions on the opened dropdown using wildcard selectors
               await new Promise(resolve => setTimeout(() => {
-                  clickElement('[id^="MARK_AS_READ_ACTION_"]'); // Mark as Read
-                  resolve();
-              }, 500));
-
-              await new Promise(resolve => setTimeout(() => {
-                  clickElementWithin(dropdown, '[id^="DOWNLOAD_AND_TRANSFER_ACTION_"]'); // Download & Transfer via USB
+                  const topDiv = Array.from(dropdown.querySelector('[class^="Dropdown-module_dropdown_container__"]').querySelectorAll('div'))
+                                      .find(div => div.textContent.includes('Download & transfer via USB')); // Download & transfer via USB
+                  topDiv.querySelector('div').click();
                   resolve();
               }, 500));
 
@@ -83,7 +80,8 @@
               }, 500));
 
               await new Promise(resolve => setTimeout(() => {
-                  clickElementWithin(dropdown, '[id^="DOWNLOAD_AND_TRANSFER_ACTION_"][id$="_CONFIRM"]'); // Confirm Download & Transfer
+                  Array.from(dropdown.querySelectorAll('[id$="_CONFIRM"]'))
+                       .find(div => div.textContent.includes('Download')).click(); // Download
                   resolve();
               }, 500));
 
