@@ -4,7 +4,7 @@
 // @version      0.2.1
 // @description  Adds a button to trigger downloads of all Kindle books on the page
 // @author       Chris Hollindale
-// @match        https://www.amazon.com/hz/mycd/digital-console/contentlist/*
+// @match        https://www.amazon.com.br/hz/mycd/digital-console/contentlist/booksAll/dateDsc/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
 // @run-at       document-idle
@@ -67,7 +67,7 @@
               // Now perform the actions on the opened dropdown using wildcard selectors
               await new Promise(resolve => setTimeout(() => {
                   const topDiv = Array.from(dropdown.querySelector('[class^="Dropdown-module_dropdown_container__"]').querySelectorAll('div'))
-                                      .find(div => div.textContent.includes('Download & transfer via USB')); // Download & transfer via USB
+                                      .find(div => div.textContent.includes('Baixar e transferir por USB')); // Download & transfer via USB
                   topDiv.querySelector('div').click();
                   resolve();
               }, 500));
@@ -81,7 +81,7 @@
 
               await new Promise(resolve => setTimeout(() => {
                   Array.from(dropdown.querySelectorAll('[id$="_CONFIRM"]'))
-                       .find(div => div.textContent.includes('Download')).click(); // Download
+                       .find(div => div.textContent.includes('Baixar')).click(); // Download
                   resolve();
               }, 500));
 
